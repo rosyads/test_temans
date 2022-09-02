@@ -16,7 +16,7 @@ use App\Http\Controllers\LoginController;
 |
 */
 
-Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout']);
 
@@ -24,6 +24,6 @@ Route::get('/', function () {
     return view('dashboard.index');
 });
 
-Route::resource('/products', ProductController::class);
+Route::resource('/products', ProductController::class)->middleware('AUth');
 
-Route::resource('/outlets', OutletController::class);
+Route::resource('/outlets', OutletController::class)->middleware('Auth');
